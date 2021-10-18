@@ -1,0 +1,10 @@
+{
+    "mongodb": {
+      "server": "cluster0.2edvy.mongodb.net",
+      "database": "myFirstDatabase?retryWrites=true&w=majority",
+      "user": "jeep2198",
+      "password": "jeep2198"
+    }
+  }
+
+  
