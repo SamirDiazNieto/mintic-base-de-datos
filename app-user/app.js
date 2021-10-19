@@ -10,7 +10,8 @@ const swaggerUI = require('swagger-ui-express');
 
  var MongoDBUtil = require('./modules/mongodb/modules/mongodb.module').MongoDBUtil;
  var CustomerController = require('./modules/customer/customer.module')().CustomerController;
- var CustomerControllerV = require('./modules/customerVentas/customer.module')().CustomerController;
+ var UsuarioController = require('./modules/usuarios/customer.module')().CustomerController;
+
 var app = express();
 
 //Swagger Configuration  
@@ -21,22 +22,12 @@ var app = express();
            version:'1.0.0'  
        }  
    },  
-   apis:['./modules/customer/customer.controller.js'],  
+   apis:['./modules/customer/customer.controller.js'], 
+   apis:['./modules/usuarios/customer.controller.js'], 
+
  }  
- const swaggerOptionsV = {  
-  swaggerDefinition: {  
-      info: {  
-          title:'Customers API',  
-          version:'1.0.0'  
-      }  
-  },  
-  apis:['./modules/customerVentas/customer.controller.js'],  
-}
- 
  const swaggerDocs = swaggerJSDoc(swaggerOptions);  
  app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
- const swaggerDocsV = swaggerJSDoc(swaggerOptionsV);  
- app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocsV));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -45,7 +36,8 @@ app.use(cookieParser());
 MongoDBUtil.init();
  app.use(cors())
  app.use('/customers', CustomerController);
- app.use('/customersVentas', CustomerControllerV);
+ app.use('/usuarios', UsuarioController);
+
 
 app.get('/', function (req, res) {
   var pkg = require(path.join(__dirname, 'package.json'));
