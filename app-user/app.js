@@ -5,10 +5,33 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-var MongoDBUtil = require('./modules/mongodb/modules/mongodb.module').MongoDBUtil;
-var CustomerController = require('./modules/customer/customer.module')().CustomerController;
-var ProductosController = require('./modules/productos/productos.module')().ProductosController;
+
+
+ var MongoDBUtil = require('./modules/mongodb/modules/mongodb.module').MongoDBUtil;
+ var CustomerController = require('./modules/customer/customer.module')().CustomerController;
+ var UsuarioController = require('./modules/usuarios/customer.module')().CustomerController;
+ var ProductosController = require('./modules/productos/productos.module')().ProductosController;
+ var CustomerControllerV = require('./modules/customerVentas/customer.module')().CustomerController;
+
 var app = express();
+
+//Swagger Configuration  
+ const swaggerOptions = {  
+   swaggerDefinition: {  
+       info: {  
+           title:'Customers API',  
+           version:'1.0.0'  
+       }  
+   },  
+   apis:['./modules/customerVentas/customer.controller.js'], 
+   apis:['./modules/customer/customer.controller.js'], 
+   apis:['./modules/usuarios/customer.controller.js'], 
+   apis:['./modules/productos/productos.controller.js'], 
+
+ }  
+ const swaggerDocs = swaggerJSDoc(swaggerOptions);  
+ app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -16,8 +39,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 MongoDBUtil.init();
-app.use(cors());
 
+ app.use(cors())
+ app.use('/usuarios', UsuarioController);
+app.use('/customersVentas', CustomerControllerV);
 app.use('/customers', CustomerController);
 app.use('/productos', ProductosController);
 app.get('/', function (req, res) {
