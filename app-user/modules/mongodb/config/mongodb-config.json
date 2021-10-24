@@ -1,9 +1,9 @@
 {
     "mongodb": {
-      "server": "cluster0.2edvy.mongodb.net",
+      "server": "cluster0.y637q.mongodb.net",
       "database": "myFirstDatabase?retryWrites=true&w=majority",
-      "user": "jeep2198",
-      "password": "jeep2198"
+      "user": "userApp",
+      "password": "userApp123"
     }
   }
 

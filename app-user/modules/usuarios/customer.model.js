@@ -11,7 +11,7 @@
         },
         rol: {
             type: String,
-            required: true
+            required: false
         },
         estado: {
             type: String,
@@ -19,7 +19,7 @@
         },
         password: {
             type: String,
-            required: true
+            required: false
         },
 
     });
