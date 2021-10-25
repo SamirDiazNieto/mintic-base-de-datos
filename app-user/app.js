@@ -57,7 +57,7 @@ function checkAuth(req, res, next) {
   }
 }
 
-//  app.use('*',checkAuth);
+ app.use('*',checkAuth);
  app.use('/customers', CustomerController);
  app.use('/usuarios', UsuarioController);
 app.get('/', function (req, res) {
