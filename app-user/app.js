@@ -63,7 +63,7 @@ function checkAuth(req, res, next) {
     res.status(401).send('Unauthorized')
   }
 }
- //
+
   app.use('*',checkAuth);
  app.use('/usuarios', UsuarioController);
  app.use('/customersVentas', CustomerControllerV);
